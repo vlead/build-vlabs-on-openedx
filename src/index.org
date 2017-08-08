@@ -1,0 +1,32 @@
+#+Title: Documnetation on versioning the open-edx labs
+#+Date: 7th Aug 2017
+#+Author: Sravanthi. M
+
+* Introduction
+  This documnet contains the process of versioning the open-edx labs to github.
+
+* Process
+
+** To be done on open-edx to export the lab
+   - Go to the [[http://vlabs.ac.in:18010/home/][Vlabs-Openedx-Studio]] to export the lab. 
+   - Select the Computer Programming lab from open-edx studio.
+   - Click on "Tools" which is found in the header part of the page.
+   - Select "Export" option from the tools.
+   - Click on the download link which is displayed after selecting the Export option.
+   - Extract the downloaded file and rename it with the appropriate lab name to identify easily.
+   - 
+
+** To be done on git to maintain the version controlling of the lab 
+   - Go to [[https://github.com/openedx-vlead][Github/OpenEdx-Vlead]] to clone the repository.
+   - Clone the lab [[https://github.com/openedx-vlead/open-edx-computer-programming-iiith.git][Computer Programming]].
+   - Copy the downloaded lab sources of computer programming lab to the github repository of Computer programming lab using the below cammand
+     
+     sravanthi@sravanthi:~/Downloads$ cp -rf computer-programming/* /home/sravanthi/open-edx-computer-programming-iiith
+     
+   - Go to the location of the lab on the terminal and follow the below steps to push the sources to  github:
+   - git status
+   - git add *
+   - git commit -m "updated the sources"
+   - git push origin master
+   - Finally enter the github username and password to push the sources to git.
+   - Version controlling of the lab is completed. 
