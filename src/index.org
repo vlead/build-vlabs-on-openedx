@@ -1,7 +1,10 @@
 #+Title: Documnetation on versioning the open-edx labs
 #+Date: 7th Aug 2017
-#+Author: Sravanthi. M
-
+#+Author: Systems Team
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
 * Introduction
   This documnet contains the process of versioning the open-edx labs to github.
 
