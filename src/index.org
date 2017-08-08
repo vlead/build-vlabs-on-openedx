@@ -43,10 +43,8 @@
    - Finally enter the github username and password to push the
      sources to git.
    - Version controlling of the lab is completed.
-
-- Created a new repository with the lab name "Single Board Heater
-  system Simulation Virtual Lab"
-- Sensors modelling and simulation - 2
+   - Created a new repository with the lab name "Single Board Heater
+     system Simulation Virtual Lab" under openedx/vlead.
 
 ** Steps to move the labs from one Organization to another Organization
    - On GitHub, navigate to the main page of the repository.
