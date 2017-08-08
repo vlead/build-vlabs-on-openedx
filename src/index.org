@@ -1,6 +1,6 @@
 #+Title: Documnetation on versioning the open-edx labs
 #+Date: 7th Aug 2017
-#+Author: Sravanthi. M
+#+Author: Sytems Team
 
 * Introduction
   This documnet contains the process of versioning the open-edx labs
@@ -35,8 +35,9 @@
      below steps to push the sources to github:
      
      #+BEGIN_EXAMPLE
-     git status git add * git commit -m "updated the sources" git push
-     origin master
+     git status git add * 
+     git commit -m "updated the sources" 
+     git push origin master
      #+END_EXAMPLE
   
    - Finally enter the github username and password to push the
