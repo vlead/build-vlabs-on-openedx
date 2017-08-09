@@ -1,52 +1,52 @@
-#+Title: Documnetation on versioning the open-edx labs
+#+Title: 
 #+Date: 7th Aug 2017
 #+Author: Sytems Team
 
 * Introduction
   This documnet contains the process of versioning the open-edx labs
   to github.
-
-* Process
-
-** Steps to export the lab from open-edx
-   - Select the Computer Programming lab from open-edx studio.
-   - Go to the [[http://vlabs.ac.in:18010/home/][Vlabs-Openedx-Studio]] to export the lab. 
-   - Click on "Tools" which is found in the header part of the page.
-   - Select "Export" option from the tools.
-   - Click on the download link which is displayed after selecting the
-     Export option.
-   - Extract the downloaded file and rename it with the appropriate
-     lab name to identify easily.
+* Requirement
+  1. Version control all [[https://github.com/vlabs-on-openedx][vlabs-on-openedx]] repositories.
+  2. Automate importing vlabs courses onto vlabs.ac.in
+* Implementation
+* First Requirement Implementation  
+*** Steps to export the lab from open-edx
+    - Select the Computer Programming lab from open-edx studio.
+    - Go to the [[http://vlabs.ac.in:18010/home/][Vlabs-Openedx-Studio]] to export the lab. 
+    - Click on "Tools" which is found in the header part of the page.
+    - Select "Export" option from the tools.
+    - Click on the download link which is displayed after selecting the
+      Export option.
+    - Extract the downloaded file and rename it with the appropriate
+      lab name to identify easily.
    
+*** Steps to version control the labs at github 
+    - Go to [[https://github.com/openedx-vlead][Github/OpenEdx-Vlead]] to clone the repository.
+    - Clone the lab [[https://github.com/openedx-vlead/open-edx-computer-programming-iiith.git][Computer Programming]].
+    - Copy the downloaded lab sources of computer programming lab to
+      the github repository of Computer programming lab using the below
+      cammand
      
-** Steps to version control the labs at github 
-   - Go to [[https://github.com/openedx-vlead][Github/OpenEdx-Vlead]] to clone the repository.
-   - Clone the lab [[https://github.com/openedx-vlead/open-edx-computer-programming-iiith.git][Computer Programming]].
-   - Copy the downloaded lab sources of computer programming lab to
-     the github repository of Computer programming lab using the below
-     cammand
+      #+BEGIN_EXAMPLE
+      sravanthi@sravanthi:~/Downloads$ cp -rf computer-programming/*
+      /home/sravanthi/open-edx-computer-programming-iiith
+      #+END_EXAMPLE
      
-     #+BEGIN_EXAMPLE
-     sravanthi@sravanthi:~/Downloads$ cp -rf computer-programming/*
-     /home/sravanthi/open-edx-computer-programming-iiith
-     #+END_EXAMPLE
+    - Go to the location of the lab on the terminal and follow the
+      below steps to push the sources to github:
      
-   - Go to the location of the lab on the terminal and follow the
-     below steps to push the sources to github:
-     
-     #+BEGIN_EXAMPLE
-     git status git add * 
-     git commit -m "updated the sources" 
-     git push origin master
-     #+END_EXAMPLE
+      #+BEGIN_EXAMPLE
+      git status git add * 
+      git commit -m "updated the sources" 
+      git push origin master
+      #+END_EXAMPLE
   
-   - Finally enter the github username and password to push the
-     sources to git.
-   - Version controlling of the lab is completed.
-   - Created a new repository with the lab name "Single Board Heater
-     system Simulation Virtual Lab" under openedx/vlead.
-
-** Steps to move the labs from one Organization to another Organization
+    - Finally enter the github username and password to push the
+      sources to git.
+    - Version controlling of the lab is completed.
+    - Created a new repository with the lab name "Single Board Heater
+      system Simulation Virtual Lab" under openedx/vlead.
+*** Steps to move the labs from one Organization to another Organization
    - On GitHub, navigate to the main page of the repository.
    - Under the lab repository name, click Settings.
    - Click Transfer.
@@ -55,49 +55,50 @@
    - Type the name of the new owner and click I understand, transfer
      this repo.
 
-** Automation Script to clone the git repositories and port to Open-edx
-*** Script to Clone all github repositories at once from Organization
- #+BEGIN_EXAMPLE
-   #!/bin/bash
-   # The script clones all repositories of an GitHub organization.
+** Second Requirement Implementation
+***  Automation Script to clone the git repositories and port to Open-edx
+**** Script to Clone all github repositories at once from Organization
+  #+BEGIN_EXAMPLE
+    #!/bin/bash
+    # The script clones all repositories of an GitHub organization.
 
-   # the github organization to fetch all repositories for
+    # the github organization to fetch all repositories for
 
-   GITHUB_ORGANIZATION=$vlabs-on-openedx
+    GITHUB_ORGANIZATION=$vlabs-on-openedx
 
-   # the git clone cmd used for cloning each repository
-   # the parameter recursive is used to clone submodules, too.
+    # the git clone cmd used for cloning each repository
+    # the parameter recursive is used to clone submodules, too.
 
-   GIT_CLONE_CMD="git clone https://github.com/vlabs-on-openedx/"
+    GIT_CLONE_CMD="git clone https://github.com/vlabs-on-openedx/"
 
-   # fetch repository list via github api
-   # grep fetches the json object key ssh_url, which contains the ssh url for the repository
+    # fetch repository list via github api
+    # grep fetches the json object key ssh_url, which contains the ssh url for the repository
 
-   REPOLIST=`curl --silent https://api.github.com/orgs/${vlabs-on-openedx}/repos?per_page=200 -q | grep "\"ssh_url\"" | awk -F': "' '{print $2}' | sed -e 's/",//g'`
+    REPOLIST=`curl --silent https://api.github.com/orgs/${vlabs-on-openedx}/repos?per_page=200 -q | grep "\"ssh_url\"" | awk -F': "' '{print $2}' | sed -e 's/",//g'`
 
-   # loop over all repository urls and execute clone
+    # loop over all repository urls and execute clone
 
-   for REPO in $REPOLIST; do
-    ${GIT_CLONE_CMD}${REPO}
-   done
+    for REPO in $REPOLIST; do
+     ${GIT_CLONE_CMD}${REPO}
+    done
 
- #+END_EXAMPLE
+  #+END_EXAMPLE
  
-- Below commad gives the detailed list of all the repositories at [[https://github.com/vlabs-on-openedx][vlabs-on-openedx]] in json
+ - Below commad gives the detailed list of all the repositories at [[https://github.com/vlabs-on-openedx][vlabs-on-openedx]] in json
  
- #+BEGIN_EXAMPLE
-   wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=200
- #+END_EXAMPLE
+  #+BEGIN_EXAMPLE
+    wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=200
+  #+END_EXAMPLE
 
-- Extract the lab repo from the json data using python:
+ - Extract the lab repo from the json data using python:
 
- #+BEGIN_EXAMPLE
-  import json
-    from pprint import pprint
+  #+BEGIN_EXAMPLE
+   import json
+     from pprint import pprint
 
-    with open('labs.json') as data_file:    
-    data = json.load(data_file)
+     with open('labs.json') as data_file:    
+     data = json.load(data_file)
 
-    pprint(data[html_url])
+     pprint(data[html_url])
 
- #+END_EXAMPLE
+  #+END_EXAMPLE
