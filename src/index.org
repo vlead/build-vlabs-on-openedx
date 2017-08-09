@@ -18,7 +18,7 @@
    - Extract the downloaded file and rename it with the appropriate
      lab name to identify easily.
    
-
+     
 ** Steps to version control the labs at github 
    - Go to [[https://github.com/openedx-vlead][Github/OpenEdx-Vlead]] to clone the repository.
    - Clone the lab [[https://github.com/openedx-vlead/open-edx-computer-programming-iiith.git][Computer Programming]].
@@ -54,3 +54,50 @@
      you've done so.
    - Type the name of the new owner and click I understand, transfer
      this repo.
+
+** Automation Script to clone the git repositories and port to Open-edx
+*** Script to Clone all github repositories at once from Organization
+ #+BEGIN_EXAMPLE
+   #!/bin/bash
+   # The script clones all repositories of an GitHub organization.
+
+   # the github organization to fetch all repositories for
+
+   GITHUB_ORGANIZATION=$vlabs-on-openedx
+
+   # the git clone cmd used for cloning each repository
+   # the parameter recursive is used to clone submodules, too.
+
+   GIT_CLONE_CMD="git clone https://github.com/vlabs-on-openedx/"
+
+   # fetch repository list via github api
+   # grep fetches the json object key ssh_url, which contains the ssh url for the repository
+
+   REPOLIST=`curl --silent https://api.github.com/orgs/${vlabs-on-openedx}/repos?per_page=200 -q | grep "\"ssh_url\"" | awk -F': "' '{print $2}' | sed -e 's/",//g'`
+
+   # loop over all repository urls and execute clone
+
+   for REPO in $REPOLIST; do
+    ${GIT_CLONE_CMD}${REPO}
+   done
+
+ #+END_EXAMPLE
+ 
+- Below commad gives the detailed list of all the repositories at [[https://github.com/vlabs-on-openedx][vlabs-on-openedx]] in json
+ 
+ #+BEGIN_EXAMPLE
+   wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=200
+ #+END_EXAMPLE
+
+- Extract the lab repo from the json data using python:
+
+ #+BEGIN_EXAMPLE
+  import json
+    from pprint import pprint
+
+    with open('labs.json') as data_file:    
+    data = json.load(data_file)
+
+    pprint(data[html_url])
+
+ #+END_EXAMPLE
