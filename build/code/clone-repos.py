@@ -1,3 +1,4 @@
+
 import json
 from pprint import pprint
 from git import Repo
@@ -11,5 +12,3 @@ with open('labs.json') as data_file:
         
 #        print("/home/sravanthi/Music/automation-labs/" + repo_name)
         Repo.clone_from(repo, "/home/sravanthi/Music/automation-labs/" + repo_name)
-#Repo.clone_from("https://github.com/vlabs-on-openedx/open-edx-computer-programming-iiith",
-#                         "/home/sravanthi/Music/automation-labs/computer-iiith")
