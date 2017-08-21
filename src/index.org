@@ -110,3 +110,12 @@ with open('labs.json') as data_file:
         tar.add(name)
 
    #+END_EXAMPLE
+
+ - Download the files from web using wget in python
+   #+BEGIN_EXAMPLE
+   
+   import os 
+
+   os.system("wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=92")
+   
+   #+END_EXAMPLE
