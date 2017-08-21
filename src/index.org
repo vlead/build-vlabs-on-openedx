@@ -64,14 +64,16 @@
 **** Script to Clone all github repositories at once from Organization
  
  - Below commad gives the detailed list of all the repositories at [[https://github.com/vlabs-on-openedx][vlabs-on-openedx]] in json format
- 
-  #+BEGIN_SRC
+
+   #+BEGIN_EXAMPLE
+   
     wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=200
-  #+END_EXAMPLE
+
+   #+END_EXAMPLE
 
  - Extract the lab repo from the json data using python:
-   
    #+BEGIN_SRC python :tangle clone-repos.py
+
 import json
 from pprint import pprint
 from git import Repo
@@ -83,7 +85,7 @@ with open('labs.json') as data_file:
         repo_name = (data[i]["name"].encode("utf-8"))
         repo = (data[i]["html_url"].encode("utf-8"))
         
-#        print("/home/sravanthi/Music/automation-labs/" + repo_name)
+       # print("/home/sravanthi/Music/automation-labs/" + repo_name)
         Repo.clone_from(repo, "/home/sravanthi/Music/automation-labs/" + repo_name)
    #+END_SRC
    
@@ -94,5 +96,17 @@ with open('labs.json') as data_file:
    from git import Repo
    
    Repo.clone_from("https://github.com/vlabs-on-openedx/open-edx-computer-programming-iiith", "/home/sravanthi/Music/automation-labs/computer-programming")
+   
    #+END_SRC
    
+ - To tar the git repositories using python  
+
+   #+BEGIN_EXAMPLE
+   
+   import tarfile
+
+   with tarfile.open((data[i]["name"].encode("utf-8")) + ".tar.gz", "w:gz" ) as tar:
+    for name in os.listdir("/home/sravanthi/Videos/automation-labs-tar"):
+        tar.add(name)
+
+   #+END_EXAMPLE

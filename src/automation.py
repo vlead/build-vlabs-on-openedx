@@ -6,21 +6,24 @@ from git import Repo
 import tarfile
 import os
 
+SRC_PATH="/home/sravanthi/Videos/automation-labs/"
+DEST_PATH="/home/sravanthi/Videos/automation-labs-tar/"
    
 with open('labs.json') as data_file:    
     data = json.load(data_file)
-    for i in range(2):
+    for i in range(91):
         repo_name = (data[i]["name"].encode("utf-8"))
-        repo = (data[i]["html_url"].encode("utf-8"))
-        
-       # print("/home/sravanthi/Videos/automation-labs/" + repo_name)
-        Repo.clone_from(repo, "/home/sravanthi/Videos/automation-labs/" + repo_name)
+        repo_url = (data[i]["html_url"].encode("utf-8"))
+        os.chdir(SRC_PATH)
+        if not os.path.isdir(repo_name):
+            Repo.clone_from(repo_url, repo_name)
 
- #       shutil.make_archive(i.zip, 'zip', vlabs-automation-labs)
+        tar_cmd = ("tar -cvf %s.tar.gz %s" % (DEST_PATH+repo_name, repo_name))
 
- 
-#folder_path = ("/home/sravanthi/Videos/automation-labs/" + repo_name) 
-with tarfile.open(  (data[i]["name"].encode("utf-8")) + ".tar.gz", "w:gz" ) as tar:
-    for name in os.listdir("/home/sravanthi/Videos/automation-labs/")
-    for name in shutil.move( "/home/sravanthi/Videos/build-vlabs-on-openedx/*", "/home/sravanthi/Videos/automation-labs-tar/" ):
-        tar.add(name)
+        os.system(tar_cmd)
+
+    #print os.system("ls")
+     # #    print( repo_name + ".tar.gz" ) 
+#     with tarfile.open(repo_name + ".tar.gz", "w:gz" ) as tar:
+#         for name in os.chdir("/home/sravanthi/Videos/automation-labs-tar"):
+#             tar.add(name)
