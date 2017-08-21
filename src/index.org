@@ -63,15 +63,17 @@
 ***  Automation Script to clone the git repositories and port to Open-edx
 **** Script to Clone all github repositories at once from Organization
  
- - Below commad gives the detailed list of all the repositories at [[https://github.com/vlabs-on-openedx][vlabs-on-openedx]] in json format
+ - Below code downloads the files from the web and renames the file.
 
    #+BEGIN_EXAMPLE
    
-    wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=200
-
+   os.system("wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=92")
+   os.rename('repos?per_page=92','edxrepos.json')
+   
    #+END_EXAMPLE
 
  - Extract the lab repo from the json data using python:
+   
    #+BEGIN_SRC python :tangle clone-repos.py
 
 import json
