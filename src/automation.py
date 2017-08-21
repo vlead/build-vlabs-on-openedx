@@ -6,24 +6,30 @@ from git import Repo
 import tarfile
 import os
 
-SRC_PATH="/home/sravanthi/Videos/automation-labs/"
-DEST_PATH="/home/sravanthi/Videos/automation-labs-tar/"
+
+os.system("wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=92")
+os.rename('repos?per_page=92','edxrepos.json')
    
-with open('labs.json') as data_file:    
+
+SRC_PATH= "../edx_repos"
+DEST_PATH = "../edx_tarfiles"
+
+os.makedirs('../edx_repos')
+os.makedirs('../edx_tarfiles')
+
+with open('edxrepos.json') as data_file:    
     data = json.load(data_file)
+    
     for i in range(91):
         repo_name = (data[i]["name"].encode("utf-8"))
         repo_url = (data[i]["html_url"].encode("utf-8"))
         os.chdir(SRC_PATH)
+
+
         if not os.path.isdir(repo_name):
             Repo.clone_from(repo_url, repo_name)
 
-        tar_cmd = ("tar -cvf %s.tar.gz %s" % (DEST_PATH+repo_name, repo_name))
+        os.chdir(DEST_PATH)   
+        tar_cmd = ("tar -cvf %s.tar.gz %s/%s" % (repo_name, SRC_PATH, repo_name))
 
         os.system(tar_cmd)
-
-    #print os.system("ls")
-     # #    print( repo_name + ".tar.gz" ) 
-#     with tarfile.open(repo_name + ".tar.gz", "w:gz" ) as tar:
-#         for name in os.chdir("/home/sravanthi/Videos/automation-labs-tar"):
-#             tar.add(name)
