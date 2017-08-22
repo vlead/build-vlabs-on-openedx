@@ -3,7 +3,7 @@ import sys
 import subprocess
 import os
 
-os.system(' apt-get install pip')                
+os.system('sudo apt-get install python-pip')                
 #easy_install pip
 
 import pip
