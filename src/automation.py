@@ -1,8 +1,12 @@
 import json
 import sys
 import subprocess
-import pip
 import os
+
+os.system(' apt-get install pip')                
+#easy_install pip
+
+import pip
 
 os.environ["HTTP_PROXY"] = "http://proxy.iiit.ac.in:8080"
 os.environ["HTTPS_PROXY"] = "http://proxy.iiit.ac.in:8080"
