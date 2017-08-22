@@ -6,7 +6,7 @@
 #+OPTIONS: ^:nil
 
 * Introduction
-  This documnet contains the process of versioning the open-edx labs
+  This documnet contains the process of versioning the vlabs labs
   to github.
 * Requirement
   1. Version control all [[https://github.com/vlabs-on-openedx][vlabs-on-openedx]] repositories.
@@ -14,8 +14,8 @@
      
 * Implementation
 * First Requirement Implementation  
-*** Steps to export the lab from open-edx
-    - Select the Computer Programming lab from open-edx studio.
+*** Steps to export the lab from vlabs
+    - Select the Computer Programming lab from vlabs studio.
     - Go to the [[http://vlabs.ac.in:18010/home/][Vlabs-Openedx-Studio]] to export the lab. 
     - Click on "Tools" which is found in the header part of the page.
     - Select "Export" option from the tools.
@@ -26,14 +26,14 @@
    
 *** Steps to version control the labs at github 
     - Go to [[https://github.com/openedx-vlead][Github/OpenEdx-Vlead]] to clone the repository.
-    - Clone the lab [[https://github.com/openedx-vlead/open-edx-computer-programming-iiith.git][Computer Programming]].
+    - Clone the lab [[https://github.com/openedx-vlead/vlabs-computer-programming-iiith.git][Computer Programming]].
     - Copy the downloaded lab sources of computer programming lab to
       the github repository of Computer programming lab using the below
       cammand
      
       #+BEGIN_EXAMPLE
       sravanthi@sravanthi:~/Downloads$ cp -rf computer-programming/*
-      /home/sravanthi/open-edx-computer-programming-iiith
+      /home/sravanthi/vlabs-computer-programming-iiith
       #+END_EXAMPLE
      
     - Go to the location of the lab on the terminal and follow the
