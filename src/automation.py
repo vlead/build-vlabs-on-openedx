@@ -1,10 +1,17 @@
 import json
 import sys
-import shutil
+import subprocess
+import pip
+import os
+
+os.environ["HTTP_PROXY"] = "http://proxy.iiit.ac.in:8080"
+os.environ["HTTPS_PROXY"] = "http://proxy.iiit.ac.in:8080"
+
+pip.main(['install', 'gitpython'])
+
 from pprint import pprint
 from git import Repo
 import tarfile
-import os
 
 
 os.system("wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=92")
@@ -33,3 +40,4 @@ with open('edxrepos.json') as data_file:
         tar_cmd = ("tar -cvf %s.tar.gz %s/%s" % (repo_name, SRC_PATH, repo_name))
 
         os.system(tar_cmd)
+

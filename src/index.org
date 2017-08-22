@@ -67,22 +67,32 @@
      - Downloads all the git repositories from the git organization in a
        JSON format using an API.
      - Renames the Json file from "repos?per_page=9" to "edxrepos.json"
+     - Install gitpython to import git repos from github
      - Using Json file every repo is cloned and tared individually
      - Moved the cloned and tared files in an appropriate folder which
        are auto-created as edx-repos & edx-tarfiles  
-
+     
    #+BEGIN_SRC python :tangle automation.py
    
 import json
 import sys
-import shutil
+import subprocess
+import pip
+import os
+
+os.environ["HTTP_PROXY"] = "http://proxy.iiit.ac.in:8080"
+os.environ["HTTPS_PROXY"] = "http://proxy.iiit.ac.in:8080"
+
+pip.main(['install', 'gitpython'])
+
 from pprint import pprint
 from git import Repo
 import tarfile
-import os
+
 
 os.system("wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=92")
-os.rename('repos?per_page=92','edxrepos.json')   
+os.rename('repos?per_page=92','edxrepos.json')
+   
 
 SRC_PATH= "../edx_repos"
 DEST_PATH = "../edx_tarfiles"
@@ -91,9 +101,9 @@ os.makedirs('../edx_repos')
 os.makedirs('../edx_tarfiles')
 
 with open('edxrepos.json') as data_file:    
-     data = json.load(data_file)
+    data = json.load(data_file)
     
-     for i in range(91):
+    for i in range(91):
         repo_name = (data[i]["name"].encode("utf-8"))
         repo_url = (data[i]["html_url"].encode("utf-8"))
         os.chdir(SRC_PATH)
