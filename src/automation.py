@@ -2,9 +2,10 @@ import json
 import sys
 import subprocess
 import os
-
+import re
 
 os.system('sudo apt-get install python-pip')                
+os.system('sudo apt-get install python-bs4')
 #easy_install pip
 
 import pip
@@ -22,7 +23,6 @@ import string
 os.system("wget https://api.github.com/orgs/vlabs-on-openedx/repos?per_page=2")
 os.rename('repos?per_page=2','edxrepos.json')
    
-
 SRC_PATH= "../edx_repos"
 DEST_PATH = "../edx_tarfiles"
 Old_String = "http://open-edx.vlabs.ac.in:5959"
@@ -42,13 +42,26 @@ with open('edxrepos.json') as data_file:
 
         if not os.path.isdir(repo_name):
             Repo.clone_from(repo_url, repo_name)
+                       
+            # re.sub(r'http://open-edx.vlabs.ac.in:5959', 'https://vlabs.ac.in:5959', '../edx_repos/*')
+            # string = "http://open-edx.vlabs.ac.in:5959"
+            # replaced = re.sub('http://open-edx.vlabs.ac.in:5959', 'https://vlabs.ac.in:5959', string)
+            # print replaced
+
+            # with open(repo_name) as dir:
             
-            with open(edx_repos) as data_file:
-                data = edx_repos(datafile)
-                os.system('grep -lr "Old_String" |xargs sed -i "s/Old_String/New_String/g"')
+            # search_String = input("Old_String ") 
+            # newstr = re.sub("Old_String", "New_String", dir.read())
+            #     # os.system('grep -lr "Old_String" ../edx_repos/* |xargs sed -i "s/Old_String/New_String/g"') 
+            # with open("repo_name", "W") as result:
+            #     result.write(New_String)
 
             # String = 'http://open-edx.vlabs.ac.in:5959'
-            # print(String.replace("http://open-edx.vlabs","https://vlabs")
+            # print String.replace("http://open-edx.vlabs","https://vlabs")
+
+            for j in dir(Old_String):
+                if SRC_PATH == Old_String:
+                    print New_String
 
             os.chdir(DEST_PATH)   
             tar_cmd = ("tar -cvf %s.tar.gz %s/%s" % (repo_name, SRC_PATH, repo_name))
