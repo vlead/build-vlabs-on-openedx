@@ -1,0 +1,36 @@
+#+Title: Dump updated edx courses in production
+#+Author: Sytems Team
+#+SETUPFILE: ../org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document contains the steps to dump updated courses in
+  production
+* Steps to dump updated courses in production
+  1. Go to the directory where the updated tarballs are saved. 
+     #+BEGIN_EXAMPLE
+     cd ../edx_tarfiles
+     #+END_EXAMPLE
+  2. Import the courses into Test machine.
+  3. Test the courses thoroughly in test machine that has edx installed
+     in it.
+  4. If every course is good or if your confident about the changes,
+     then take the courses dump from mongodb. Command to take the
+     courses dump from mongodb database on Test machine
+     #+BEGIN_EXAMPLE
+     sudo mongodump -o ./mongo-backup
+
+     #+END_EXAMPLE
+  5. Copy the courses dump (mongo-backup directory) to Production edx
+     platform using rsync command
+  6. Once you have dump of courses, go to production edx platform
+  7. Restore the courses using =mongo-backup= dump. Use the below
+     command to restore.
+     #+BEGIN_EXAMPLE
+     sudo mongorestore -drop ./mongo-backup               
+     #+END_EXAMPLE
+
+     [[https://github.com/openedx-vlead/port-labs-to-openedx/blob/master/src/platform-install-configure/backup.org][Reference link]]
+

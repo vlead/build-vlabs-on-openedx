@@ -12,7 +12,8 @@
   - [[./requirements/index.org][Requiremnts of this project]]
 * Implementation
   - [[./implementation/index.org][Implementation of the above requirements]]
-* TODO How to deploy latest available updates in Production edx platform 
+* Dump courses into production edx platform
+  [[./dump-courses-in-production/update-courses-in-production.org][Dump the updated courses in production]]
 * Issues on GitHub
   [[https://github.com/vlead/build-vlabs-on-openedx/issues][Issues on GitHub]]
 

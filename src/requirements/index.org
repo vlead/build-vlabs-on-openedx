@@ -1,4 +1,4 @@
-#+Title: Build vlabs on Openedx 
+#+Title: Requirements for *build vlabs on OpenedX* project
 #+Author: Sytems Team
 #+SETUPFILE: ../org-templates/level-1.org
 #+TAGS: boilerplate(b)
