@@ -6,8 +6,8 @@
 #+OPTIONS: ^:nil
 
 * Introduction
-  This documnet contains the process of versioning the vlabs labs
-  to github.
+  This documnet contains the process of versioning the virtual lab
+  sources to github.
 * Requirement
   1. Version control all [[https://github.com/vlabs-on-openedx][vlabs-on-openedx]] repositories.
   2. Automate importing vlabs courses onto vlabs.ac.in
@@ -25,31 +25,48 @@
       lab name to identify easily.
    
 *** Steps to version control the labs at github 
-    - Go to [[https://github.com/openedx-vlead][Github/OpenEdx-Vlead]] to clone the repository.
-    - Clone the lab [[https://github.com/openedx-vlead/vlabs-computer-programming-iiith.git][Computer Programming]].
-    - Copy the downloaded lab sources of computer programming lab to
-      the github repository of Computer programming lab using the below
-      cammand
+    - Go to [[https://github.com/openedx-vlead][Github/OpenEdx-Vlead]]  organization to clone the repository.
+    - Clone the lab.
+    - Now copy the lab sources which are extracted from the vlabs.ac.in to
+      the cloned repository of a lab.
+    - Considering computer programming lab as an example to extract
+      and version control the lab.
+      
+    *Example:*
+        *Exporting the lab from open edx studio*
+        - Type vlabs.ac.in:18010 on borwser
+	- Login to the Open edX studio -> Choose Computer Programming
+          Lab -> Click on Tools -> Export -> Click on Export Course
+          Content -> Displays a pop up to download the course -> Save
+          and rename the course as computer-programming-lab.
+	*Version Controlling the edx course* 
+        - Got to [[https://github.com/vlabs-on-openedx][Vlabs-on-OpenedX]] organization and clone [[https://github.com/vlabs-on-openedx/open-edx-computer-programming-iiith][Computer Programming Lab]] 
+        #+BEGIN_EXAMPLE
+	git clone https://github.com/vlabs-on-openedx/open-edx-computer-programming-iiith
+	#+END_EXAMPLE 
+
+	- Now copy the downloaded lab courses to the cloned repository
+          using the below comman:
+        #+BEGIN_EXAMPLE
+        $ cp -rf computer-programming-lab/* ../open-edx-computer-programming-iiith
+        #+END_EXAMPLE
      
-      #+BEGIN_EXAMPLE
-      sravanthi@sravanthi:~/Downloads$ cp -rf computer-programming/*
-      /home/sravanthi/vlabs-computer-programming-iiith
-      #+END_EXAMPLE
+        - Use *Terminal* and go to path where the lab is cloned to push
+        the sources to github with the below commands:
      
-    - Go to the location of the lab on the terminal and follow the
-      below steps to push the sources to github:
-     
-      #+BEGIN_EXAMPLE
-      git status git add * 
-      git commit -m "updated the sources" 
-      git push origin master
-      #+END_EXAMPLE
-  
+        #+BEGIN_EXAMPLE
+        git status git add * 
+        git commit -m "updated the sources" 
+        git push origin master
+        #+END_EXAMPLE
+        
+        - Give gitusername and password 
+        - The sorces are versioned controlled successfully. 
+
     - Finally enter the github username and password to push the
       sources to git.
     - Version controlling of the lab is completed.
-    - Created a new repository with the lab name "Single Board Heater
-      system Simulation Virtual Lab" under openedx/vlead.
+ 
 *** Steps to move the labs from one Organization to another Organization
    - On GitHub, navigate to the main page of the repository.
    - Under the lab repository name, click Settings.
@@ -58,15 +75,21 @@
      you've done so.
    - Type the name of the new owner and click I understand, transfer
      this repo.
-
+   - Created a new repository with the lab name "Single Board Heater
+     system Simulation Virtual Lab" under openedx/vlead.
 ** Second Requirement Implementation
 ***  Automation Script to clone the git repositories
      - Below pyhton code imports the required modules
+     - Installs python-pip and gitpython 
+     - Python-pip is to install git python
+     - GitPython is a python library used to interact with Git repositories.
      - Downloads all the git repositories from the git organization in a
        JSON format using an API.
-     - Renames the Json file from "repos?per_page=9" to "edxrepos.json"
-     - Install gitpython to import git repos from github
-     - Using Json file every repo is cloned and tared individually
+     - Renames the Json file from "repos?per_page=92" to "edxrepos.json"
+     - Using Json file every repo is cloned and tared individually.
+     - Replaced a link *http://open-edx.vlabs.ac.in:5959* to 
+       *https://vlabs.ac.in:5959* in all the feedback links of all
+       the labs.
      - Moved the cloned and tared files in an appropriate folder which
        are auto-created as edx-repos & edx-tarfiles  
      
@@ -79,7 +102,6 @@ import os
 import re
 
 os.system('sudo apt-get install python-pip')                
-os.system('sudo apt-get install python-bs4')
 #easy_install pip
 
 import pip
@@ -113,7 +135,6 @@ with open('edxrepos.json') as data_file:
         repo_url = (data[i]["html_url"].encode("utf-8"))
         os.chdir(SRC_PATH)
 
-
         if not os.path.isdir(repo_name):
             Repo.clone_from(repo_url, repo_name)
 
@@ -123,7 +144,6 @@ with open('edxrepos.json') as data_file:
 
             os.chdir(DEST_PATH)   
             tar_cmd = ("tar -cvf %s.tar.gz %s/%s" % (repo_name, SRC_PATH, repo_name))
-            
             os.system(tar_cmd)
 
    #+END_SRC
