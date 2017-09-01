@@ -38,7 +38,6 @@ with open('edxrepos.json') as data_file:
         repo_url = (data[i]["html_url"].encode("utf-8"))
         os.chdir(SRC_PATH)
 
-
         if not os.path.isdir(repo_name):
             Repo.clone_from(repo_url, repo_name)
                        
@@ -46,9 +45,7 @@ with open('edxrepos.json') as data_file:
             pprint (cmd)
             os.system(cmd)   
             
-            
             os.chdir(DEST_PATH)   
             tar_cmd = ("tar -cvf %s.tar.gz %s/%s" % (repo_name, SRC_PATH, repo_name))
-            
             os.system(tar_cmd)
 
