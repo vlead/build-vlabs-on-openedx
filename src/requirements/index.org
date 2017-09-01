@@ -1,0 +1,18 @@
+#+Title: Build vlabs on Openedx 
+#+Author: Sytems Team
+#+SETUPFILE: ../org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document contains the requirements for *build vlabs on OpenedX* project
+* Requirements
+  1. Version control all [[https://github.com/vlabs-on-openedx][vlabs-on-openedx]] organization repositories.
+  2. Clone All repositories from [[https://github.com/vlabs-on-openedx][vlabs-on-openedx]] organization
+  3. Replacing the string in cloned repository 
+  4. Version control each repository after 3rd requirement is
+     satisfied.
+  5. Create tarball for each repository after 3rd requirement is
+     satisfied.
+
