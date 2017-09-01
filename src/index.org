@@ -9,9 +9,9 @@
   This documnet contains the process of versioning the virtual lab
   sources to github.
 * Requirements
-  - [[./requirements/][Requiremnts of this project]]
+  - [[./requirements/index.org][Requiremnts of this project]]
 * Implementation
-  - [[./implementation/][Implementation of the above requirements]]
+  - [[./implementation/index.org][Implementation of the above requirements]]
 * TODO How to deploy latest available updates in Production edx platform 
 * Issues on GitHub
   [[https://github.com/vlead/build-vlabs-on-openedx/issues][Issues on GitHub]]
