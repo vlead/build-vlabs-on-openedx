@@ -121,7 +121,10 @@ with open('edxrepos.json') as data_file:
             cmd="grep -lr  "  + old_string + " " + "../edx_repos" + " |xargs sed -i " + "\"s#" +old_string + "#" + new_string + "#g\""
             pprint (cmd)
             os.system(cmd)             
-
+            
+            cmd1="rsync -r SRC_PATH "
+            os.system(cmd1)
+            
             os.chdir(DEST_PATH)   
             tar_cmd = ("tar -cvf %s.tar.gz %s/%s" % (repo_name, SRC_PATH, repo_name))
             os.system(tar_cmd)
