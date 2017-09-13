@@ -141,4 +141,16 @@ with open('edxrepos.json') as data_file:
      this repo.
    - Created a new repository with the lab name "Single Board Heater
      system Simulation Virtual Lab" under openedx/vlead.
-     
+    
+* Issues in the Open-edX
+  - Feedback links should be changed from http://open-edx.vlabs.ac.in:5995 to https://vlabs.ac.in:5959
+  - Fixed the feedback issue in all the labs.
+  - Full screen is diappeard in some of the labs.
+  - Added Full Screen to the experiments.
+  - While editing the html page on Open-edX studio, the html editor in the
+    simulation unit was not responded to updated the Full Screen
+    button.
+  - Hence deleted the existing Iframe in the html editor and added new
+    Iframe for the above mentioneñd two labs and updated the
+    experiment Id.
+
